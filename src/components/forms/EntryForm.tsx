@@ -103,8 +103,12 @@ export function EntryForm({
         </div>
 
         <CardBody>
-          {tab === "activity" && (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div
+            className={cn(
+              "grid grid-cols-1 gap-4 sm:grid-cols-2",
+              tab !== "activity" && "hidden",
+            )}
+          >
               <Field label="Steps" htmlFor="steps" error={errors.steps}>
                 <Input id="steps" name="steps" type="number" min="0" placeholder="8000" defaultValue={val(entry?.steps)} />
               </Field>
@@ -120,11 +124,14 @@ export function EntryForm({
               <Field label="Workout minutes" htmlFor="workoutMinutes" error={errors.workoutMinutes}>
                 <Input id="workoutMinutes" name="workoutMinutes" type="number" min="0" placeholder="30" defaultValue={val(entry?.workoutMinutes)} />
               </Field>
-            </div>
-          )}
+          </div>
 
-          {tab === "body" && (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div
+            className={cn(
+              "grid grid-cols-1 gap-4 sm:grid-cols-2",
+              tab !== "body" && "hidden",
+            )}
+          >
               <Field label="Weight (kg)" htmlFor="weightKg" error={errors.weightKg}>
                 <Input id="weightKg" name="weightKg" type="number" step="0.1" min="0" placeholder="72.5" defaultValue={val(entry?.weightKg)} />
               </Field>
@@ -140,11 +147,14 @@ export function EntryForm({
               <Field label="Resting heart rate (bpm)" htmlFor="restingHeartRate" error={errors.restingHeartRate}>
                 <Input id="restingHeartRate" name="restingHeartRate" type="number" min="0" placeholder="60" defaultValue={val(entry?.restingHeartRate)} />
               </Field>
-            </div>
-          )}
+          </div>
 
-          {tab === "nutrition" && (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div
+            className={cn(
+              "grid grid-cols-1 gap-4 sm:grid-cols-2",
+              tab !== "nutrition" && "hidden",
+            )}
+          >
               <Field label="Calories (kcal)" htmlFor="calories" error={errors.calories}>
                 <Input id="calories" name="calories" type="number" min="0" placeholder="2100" defaultValue={val(entry?.calories)} />
               </Field>
@@ -160,11 +170,14 @@ export function EntryForm({
               <Field label="Fat (g)" htmlFor="fatG" error={errors.fatG}>
                 <Input id="fatG" name="fatG" type="number" step="0.1" min="0" placeholder="70" defaultValue={val(entry?.fatG)} />
               </Field>
-            </div>
-          )}
+          </div>
 
-          {tab === "sleep" && (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div
+            className={cn(
+              "grid grid-cols-1 gap-4 sm:grid-cols-2",
+              tab !== "sleep" && "hidden",
+            )}
+          >
               <Field label="Sleep (hours)" htmlFor="sleepHours" error={errors.sleepHours}>
                 <Input id="sleepHours" name="sleepHours" type="number" step="0.1" min="0" max="24" placeholder="7.5" defaultValue={val(entry?.sleepHours)} />
               </Field>
@@ -193,8 +206,7 @@ export function EntryForm({
                   <Textarea id="notes" name="notes" placeholder="How did today feel?" defaultValue={val(entry?.notes)} />
                 </Field>
               </div>
-            </div>
-          )}
+          </div>
         </CardBody>
 
         <div className="flex items-center justify-between gap-3 border-t border-[var(--color-border)] px-5 py-3.5">
