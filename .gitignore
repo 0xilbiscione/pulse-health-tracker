@@ -1,0 +1,26 @@
+# dependencies
+node_modules
+
+# build output
+.next
+out
+build
+next-env.d.ts
+
+# env & secrets
+.env
+.env.*
+!.env.example
+*.token
+*.pem
+
+# database
+*.db
+*.db-journal
+prisma/dev.db
+prisma/migrations/dev.db
+
+# misc
+.DS_Store
+*.log
+.pm2

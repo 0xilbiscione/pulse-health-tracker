@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pulse — User Guidelines</title>
+    <style>
+      :root {
+        --ink: #111827;
+        --muted: #6b7280;
+        --border: #e8eaed;
+        --bg: #f6f7f9;
+        --brand: #1f5fe0;
+        --brand-50: #eef6ff;
+        --activity: #f97316;
+        --body: #8b5cf6;
+        --nutrition: #10b981;
+        --sleep: #6366f1;
+        --water: #06b6d4;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      .page {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 40px 28px 80px;
+      }
+
+      /* Header */
+      header.masthead {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid var(--border);
+      }
+      .logo {
+        width: 46px; height: 46px;
+        border-radius: 14px;
+        background: var(--brand);
+        color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 24px;
+      }
+      .masthead h1 { font-size: 24px; margin: 0; letter-spacing: -0.02em; }
+      .masthead p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+      .masthead .spacer { flex: 1; }
+
+      .toolbar { margin: 18px 0 28px; }
+      .btn {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: var(--brand); color: #fff;
+        border: none; border-radius: 10px;
+        padding: 9px 16px; font-size: 14px; font-weight: 600;
+        cursor: pointer; text-decoration: none;
+      }
+      .btn:hover { background: #1b4fc0; }
+
+      h2 {
+        font-size: 18px; margin: 34px 0 10px;
+        letter-spacing: -0.01em;
+        padding-top: 8px;
+      }
+      h3 { font-size: 15px; margin: 20px 0 6px; }
+      p, li { font-size: 14.5px; }
+      a { color: var(--brand); }
+
+      .lead {
+        background: var(--brand-50);
+        border: 1px solid #d9ebff;
+        border-radius: 14px;
+        padding: 16px 18px;
+        font-size: 15px;
+        margin-top: 24px;
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px 20px;
+        margin: 14px 0;
+      }
+
+      ol.steps { padding-left: 20px; margin: 8px 0; }
+      ol.steps li { margin: 6px 0; }
+      ul.tight { margin: 8px 0; padding-left: 20px; }
+      ul.tight li { margin: 4px 0; }
+
+      .pill {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #fff;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0;
+        font-size: 14px;
+      }
+      th, td {
+        text-align: left;
+        padding: 9px 10px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+      th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+      td code, p code, li code {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1px 6px;
+        font-size: 13px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .cat {
+        border-left: 4px solid var(--border);
+        padding-left: 14px;
+      }
+      .cat h3 { margin-top: 0; }
+      .cat.activity { border-color: var(--activity); }
+      .cat.body { border-color: var(--body); }
+      .cat.nutrition { border-color: var(--nutrition); }
+      .cat.sleep { border-color: var(--sleep); }
+
+      .demo {
+        background: #fff; border: 1px dashed var(--brand);
+        border-radius: 12px; padding: 12px 16px; margin: 12px 0;
+        font-size: 14px;
+      }
+      details { margin: 8px 0; }
+      summary { cursor: pointer; font-weight: 600; font-size: 14.5px; padding: 6px 0; }
+
+      footer.foot {
+        margin-top: 44px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 13px;
+        display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      }
+
+      /* Print */
+      @media print {
+        body { background: #fff; }
+        .page { max-width: none; padding: 0; }
+        .toolbar, .no-print { display: none !important; }
+        .card, .lead, .demo { break-inside: avoid; }
+        h2 { break-after: avoid; }
+        a { color: var(--ink); text-decoration: none; }
+        @page { margin: 16mm; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="masthead">
+        <div class="logo">♥</div>
+        <div>
+          <h1>Pulse — User Guidelines</h1>
+          <p>Your personal health dashboard · track, set goals, see your trends</p>
+        </div>
+      </header>
+
+      <div class="toolbar no-print">
+        <button class="btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+      </div>
+
+      <p class="lead">
+        <strong>Welcome to Pulse.</strong> Log a few numbers each day — steps, weight,
+        meals, sleep — and Pulse turns them into a clean dashboard with goal rings,
+        streaks, and weekly insights. Everything below takes about five minutes to learn.
+      </p>
+
+      <h2>1. Getting started</h2>
+      <div class="card">
+        <ol class="steps">
+          <li>Open <a href="https://fit.metricbase.org">fit.metricbase.org</a> in any browser.</li>
+          <li>Click <strong>Create one</strong> on the sign-in screen and enter your name,
+            email, and a password (at least 6 characters).</li>
+          <li>You'll land on your <strong>Dashboard</strong>. It starts mostly empty — that's
+            expected until you log your first entry.</li>
+        </ol>
+        <div class="demo">
+          <strong>Just want a look around?</strong> Sign in with the demo account —
+          email <code>demo@health.app</code>, password <code>demo1234</code> — to see a
+          dashboard pre-filled with 30 days of sample data.
+        </div>
+        <p style="margin-bottom:0;color:var(--muted);font-size:13px">
+          Your data is private to your account. Other users can never see your entries.
+        </p>
+      </div>
+
+      <h2>2. Logging an entry</h2>
+      <p>
+        Pulse keeps <strong>one entry per day</strong>. Go to <strong>Log entry</strong>
+        in the menu, pick the date if needed, and fill in whatever you have — every field
+        is optional. The form is split into four tabs:
+      </p>
+
+      <div class="grid">
+        <div class="cat activity">
+          <h3><span class="pill" style="background:var(--activity)">Activity</span></h3>
+          <ul class="tight">
+            <li>Steps, distance (km)</li>
+            <li>Active minutes</li>
+            <li>Workout type &amp; minutes</li>
+          </ul>
+        </div>
+        <div class="cat body">
+          <h3><span class="pill" style="background:var(--body)">Body</span></h3>
+          <ul class="tight">
+            <li>Weight (kg), body fat %</li>
+            <li>Blood pressure (systolic / diastolic)</li>
+            <li>Resting heart rate</li>
+          </ul>
+        </div>
+        <div class="cat nutrition">
+          <h3><span class="pill" style="background:var(--nutrition)">Nutrition</span></h3>
+          <ul class="tight">
+            <li>Calories</li>
+            <li>Protein / carbs / fat (g)</li>
+            <li>Water (ml)</li>
+          </ul>
+        </div>
+        <div class="cat sleep">
+          <h3><span class="pill" style="background:var(--sleep)">Sleep &amp; Mood</span></h3>
+          <ul class="tight">
+            <li>Sleep hours &amp; quality (1–5)</li>
+            <li>Mood, energy, stress (1–5)</li>
+            <li>Free-text notes</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <ol class="steps">
+          <li>Fill any fields across the four tabs.</li>
+          <li>Press <strong>Save entry</strong>. A green “Saved” confirmation appears.</li>
+          <li>Re-open the same day to <strong>edit in place</strong>, or use
+            <strong>Delete</strong> to remove that day.</li>
+        </ol>
+        <p style="margin-bottom:0;color:var(--muted);font-size:13px">
+          Tip: log at the same time each day (e.g. before bed) to keep your streak alive.
+        </p>
+      </div>
+
+      <h2>3. Setting goals</h2>
+      <div class="card">
+        <p style="margin-top:0">
+          Open <strong>Goals</strong> to choose daily targets. Toggle a goal on, type a
+          target, and press <strong>Save</strong>. Active goals appear as progress rings
+          on your dashboard.
+        </p>
+        <table>
+          <thead>
+            <tr><th>Goal</th><th>Type</th><th>Meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Steps, Active minutes, Water, Sleep</td><td>Reach or exceed</td><td>Ring fills as you approach the target; full when you hit it.</td></tr>
+            <tr><td>Calories, Weight</td><td>Stay at or under</td><td>Ring is full while you're at or below target.</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-bottom:0">
+          New accounts start with sensible defaults (e.g. 10,000 steps, 2,000 ml water,
+          8 hours sleep). Change them any time.
+        </p>
+      </div>
+
+      <h2>4. Reading your dashboard</h2>
+      <div class="card">
+        <ul class="tight">
+          <li><strong>Stat cards</strong> — today's key numbers with a small arrow showing
+            this week vs last week (green = a good change, red = worth a look).</li>
+          <li><strong>Goal rings</strong> — today's progress toward each active goal.</li>
+          <li><strong>Logging streak</strong> — consecutive days you've logged anything.
+            A flame marks your best current goal streak too.</li>
+          <li><strong>Trend charts</strong> — steps, sleep, water, and weight over the last
+            30 days.</li>
+          <li><strong>This week's insights</strong> — short auto-generated notes about what's
+            improving or slipping.</li>
+        </ul>
+      </div>
+
+      <h2>5. Insights page</h2>
+      <div class="card">
+        <ul class="tight" style="margin-top:0">
+          <li><strong>Weekly averages</strong> — every metric, this week vs last, with a
+            trend arrow.</li>
+          <li><strong>Quick totals</strong> — days logged, weekly step total, water in
+            litres, average sleep.</li>
+          <li><strong>Daily bars</strong> — steps, water, active minutes, and calories per
+            day; bars below your goal are faded so gaps stand out.</li>
+        </ul>
+      </div>
+
+      <h2>6. Tips &amp; FAQ</h2>
+      <details open>
+        <summary>How often should I log?</summary>
+        <p>Once a day is ideal. Consistency matters more than filling every field — even
+          just steps and sleep produces useful trends.</p>
+      </details>
+      <details>
+        <summary>Can I log a past day?</summary>
+        <p>Yes. On <strong>Log entry</strong>, use the date picker to select any earlier
+          date, then save.</p>
+      </details>
+      <details>
+        <summary>I left fields blank — is that OK?</summary>
+        <p>Absolutely. Blank fields are simply ignored; charts connect across days that have
+          data.</p>
+      </details>
+      <details>
+        <summary>Which units does Pulse use?</summary>
+        <p>Metric: kilograms, kilometres, millilitres, and kilocalories. Quality, mood,
+          energy, and stress use a simple 1–5 scale.</p>
+      </details>
+      <details>
+        <summary>How do I sign out?</summary>
+        <p>Use the sign-out icon in the top-right of the header.</p>
+      </details>
+      <details>
+        <summary>Is my data shared?</summary>
+        <p>No. Entries are tied to your account and visible only to you.</p>
+      </details>
+
+      <footer class="foot">
+        <span>Pulse · Health Tracker</span>
+        <span>fit.metricbase.org/userguidelines</span>
+      </footer>
+    </main>
+  </body>
+</html>

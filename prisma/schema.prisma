@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  name         String?
+  passwordHash String
+  createdAt    DateTime      @default(now())
+
+  entries      HealthEntry[]
+  goals        Goal[]
+}
+
+model HealthEntry {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // Logical day for this entry (stored at local midnight, ISO date string semantics)
+  date      DateTime
+
+  // Activity & steps
+  steps         Int?
+  distanceKm    Float?
+  activeMinutes Int?
+  workoutType   String?
+  workoutMinutes Int?
+
+  // Body measurements
+  weightKg         Float?
+  bodyFatPct       Float?
+  systolic         Int?
+  diastolic        Int?
+  restingHeartRate Int?
+
+  // Nutrition & water
+  calories  Int?
+  proteinG  Float?
+  carbsG    Float?
+  fatG      Float?
+  waterMl   Int?
+
+  // Sleep & mood (quality/mood/energy/stress on a 1-5 scale)
+  sleepHours   Float?
+  sleepQuality Int?
+  mood         Int?
+  energy       Int?
+  stress       Int?
+
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, date])
+  @@index([userId, date])
+}
+
+model Goal {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  metric    String   // STEPS | WATER_ML | WEIGHT_KG | SLEEP_HOURS | CALORIES | ACTIVE_MINUTES
+  target    Float
+  period    String   @default("DAILY") // DAILY | WEEKLY
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, metric])
+}
