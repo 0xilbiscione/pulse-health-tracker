@@ -39,17 +39,51 @@ export function EntryForm({
 }) {
   const router = useRouter();
   const [tab, setTab] = useState<TabId>("activity");
+  // "add" = new value accumulates onto today's total; "set" = edit the total directly.
+  const [mode, setMode] = useState<"add" | "set">("add");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [saved, setSaved] = useState(false);
   const [pending, startTransition] = useTransition();
 
-  // Additive fields render empty — a submitted value adds to the day's running
-  // total — so we surface how much is already logged as a hint.
-  const addHint = (field: keyof EntryData, unit: string) => {
-    const v = entry ? entry[field] : null;
-    return typeof v === "number"
-      ? `Today so far: ${v.toLocaleString()}${unit ? ` ${unit}` : ""} · adds on top`
-      : "Adds to today's total";
+  // Renders an additive numeric field. In "add" mode it's empty and adds on top
+  // of the day's total; in "set" mode it's prefilled with the current total and
+  // replaces it (to correct a mistake). `key={mode}` remounts to swap the value.
+  const addField = (
+    name: keyof EntryData & string,
+    label: string,
+    unit: string,
+    step?: string,
+  ) => {
+    const current = entry ? entry[name] : null;
+    const cur = typeof current === "number" ? current : null;
+    const isSet = mode === "set";
+    return (
+      <Field
+        label={label}
+        htmlFor={name}
+        error={errors[name]}
+        hint={
+          isSet
+            ? cur !== null
+              ? `Editing total · replaces (was ${cur.toLocaleString()}${unit ? ` ${unit}` : ""})`
+              : "Sets today's total"
+            : cur !== null
+              ? `Today so far: ${cur.toLocaleString()}${unit ? ` ${unit}` : ""} · adds on top`
+              : "Adds to today's total"
+        }
+      >
+        <Input
+          key={mode}
+          id={name}
+          name={name}
+          type="number"
+          min="0"
+          step={step}
+          placeholder={isSet ? `total ${unit}`.trim() : `+ add ${unit}`.trim()}
+          defaultValue={isSet ? val(cur) : ""}
+        />
+      </Field>
+    );
   };
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -82,6 +116,7 @@ export function EntryForm({
     <Card>
       <form onSubmit={onSubmit}>
         <input type="hidden" name="date" value={date} />
+        <input type="hidden" name="mode" value={mode} />
 
         {/* Tabs */}
         <div className="flex gap-1 overflow-x-auto border-b border-[var(--color-border)] px-3 pt-3">
@@ -112,27 +147,55 @@ export function EntryForm({
         </div>
 
         <CardBody>
+          {(tab === "activity" || tab === "nutrition") && (
+            <div className="mb-4 flex items-center justify-between gap-3 rounded-xl bg-[var(--color-bg)] px-3 py-2">
+              <span className="text-xs text-[var(--color-muted)]">
+                {mode === "add"
+                  ? "New values add to today's total"
+                  : "Editing today's totals directly"}
+              </span>
+              <div className="flex items-center rounded-lg border border-[var(--color-border)] bg-white p-0.5 text-xs font-medium">
+                <button
+                  type="button"
+                  onClick={() => setMode("add")}
+                  className={cn(
+                    "rounded-md px-2.5 py-1 transition-colors",
+                    mode === "add"
+                      ? "bg-[var(--color-brand-600)] text-white"
+                      : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",
+                  )}
+                >
+                  Add
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMode("set")}
+                  className={cn(
+                    "rounded-md px-2.5 py-1 transition-colors",
+                    mode === "set"
+                      ? "bg-[var(--color-brand-600)] text-white"
+                      : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",
+                  )}
+                >
+                  Set total
+                </button>
+              </div>
+            </div>
+          )}
+
           <div
             className={cn(
               "grid grid-cols-1 gap-4 sm:grid-cols-2",
               tab !== "activity" && "hidden",
             )}
           >
-              <Field label="Steps" htmlFor="steps" error={errors.steps} hint={addHint("steps", "steps")}>
-                <Input id="steps" name="steps" type="number" min="0" placeholder="+ add steps" defaultValue="" />
-              </Field>
-              <Field label="Distance (km)" htmlFor="distanceKm" error={errors.distanceKm} hint={addHint("distanceKm", "km")}>
-                <Input id="distanceKm" name="distanceKm" type="number" step="0.1" min="0" placeholder="+ add km" defaultValue="" />
-              </Field>
-              <Field label="Active minutes" htmlFor="activeMinutes" error={errors.activeMinutes} hint={addHint("activeMinutes", "min")}>
-                <Input id="activeMinutes" name="activeMinutes" type="number" min="0" placeholder="+ add min" defaultValue="" />
-              </Field>
+              {addField("steps", "Steps", "steps")}
+              {addField("distanceKm", "Distance (km)", "km", "0.1")}
+              {addField("activeMinutes", "Active minutes", "min")}
               <Field label="Workout type" htmlFor="workoutType" error={errors.workoutType}>
                 <Input id="workoutType" name="workoutType" placeholder="Run, Strength…" defaultValue={val(entry?.workoutType)} />
               </Field>
-              <Field label="Workout minutes" htmlFor="workoutMinutes" error={errors.workoutMinutes} hint={addHint("workoutMinutes", "min")}>
-                <Input id="workoutMinutes" name="workoutMinutes" type="number" min="0" placeholder="+ add min" defaultValue="" />
-              </Field>
+              {addField("workoutMinutes", "Workout minutes", "min")}
           </div>
 
           <div
@@ -164,21 +227,11 @@ export function EntryForm({
               tab !== "nutrition" && "hidden",
             )}
           >
-              <Field label="Calories (kcal)" htmlFor="calories" error={errors.calories} hint={addHint("calories", "kcal")}>
-                <Input id="calories" name="calories" type="number" min="0" placeholder="+ add kcal" defaultValue="" />
-              </Field>
-              <Field label="Water (ml)" htmlFor="waterMl" error={errors.waterMl} hint={addHint("waterMl", "ml")}>
-                <Input id="waterMl" name="waterMl" type="number" min="0" placeholder="+ add ml" defaultValue="" />
-              </Field>
-              <Field label="Protein (g)" htmlFor="proteinG" error={errors.proteinG} hint={addHint("proteinG", "g")}>
-                <Input id="proteinG" name="proteinG" type="number" step="0.1" min="0" placeholder="+ add g" defaultValue="" />
-              </Field>
-              <Field label="Carbs (g)" htmlFor="carbsG" error={errors.carbsG} hint={addHint("carbsG", "g")}>
-                <Input id="carbsG" name="carbsG" type="number" step="0.1" min="0" placeholder="+ add g" defaultValue="" />
-              </Field>
-              <Field label="Fat (g)" htmlFor="fatG" error={errors.fatG} hint={addHint("fatG", "g")}>
-                <Input id="fatG" name="fatG" type="number" step="0.1" min="0" placeholder="+ add g" defaultValue="" />
-              </Field>
+              {addField("calories", "Calories (kcal)", "kcal")}
+              {addField("waterMl", "Water (ml)", "ml")}
+              {addField("proteinG", "Protein (g)", "g", "0.1")}
+              {addField("carbsG", "Carbs (g)", "g", "0.1")}
+              {addField("fatG", "Fat (g)", "g", "0.1")}
           </div>
 
           <div

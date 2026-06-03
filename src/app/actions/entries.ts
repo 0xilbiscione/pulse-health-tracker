@@ -81,12 +81,17 @@ export async function upsertEntry(formData: FormData): Promise<ActionResult> {
   const { date, ...data } = parsed.data;
   const storageDate = toStorageDate(date);
 
-  // Merge against the day's existing row so additive fields accumulate instead
-  // of overwriting (steps, water, calories, …); other fields are replaced.
+  // "add" (default) accumulates additive fields onto the day's running total;
+  // "set" edits the totals directly (replace everything) to correct a mistake.
+  const mode = formData.get("mode") === "set" ? "set" : "add";
+
   const existing = await prisma.healthEntry.findUnique({
     where: { userId_date: { userId, date: storageDate } },
   });
-  const merged = mergeEntryData(existing as Record<string, unknown> | null, data);
+  const merged =
+    mode === "set"
+      ? data
+      : mergeEntryData(existing as Record<string, unknown> | null, data);
 
   await prisma.healthEntry.upsert({
     where: { userId_date: { userId, date: storageDate } },
