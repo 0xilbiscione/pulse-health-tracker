@@ -17,6 +17,30 @@ export type EntryField =
   | "calories"
   | "activeMinutes";
 
+/**
+ * Entry fields that ACCUMULATE across multiple saves in the same day — a newly
+ * submitted value is added to the running total. Everything else is
+ * replace/last-write (e.g. weight, blood pressure, sleep, mood ratings), where
+ * summing would be meaningless.
+ */
+export const ADDITIVE_ENTRY_FIELDS = [
+  "steps",
+  "distanceKm",
+  "activeMinutes",
+  "workoutMinutes",
+  "calories",
+  "proteinG",
+  "carbsG",
+  "fatG",
+  "waterMl",
+] as const;
+
+export type AdditiveField = (typeof ADDITIVE_ENTRY_FIELDS)[number];
+
+export function isAdditiveField(field: string): boolean {
+  return (ADDITIVE_ENTRY_FIELDS as readonly string[]).includes(field);
+}
+
 export type GoalDirection = "atLeast" | "atMost";
 
 export interface MetricDef {

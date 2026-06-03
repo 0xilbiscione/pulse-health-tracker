@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { requireUserId } from "@/lib/session";
 import { entrySchema } from "@/lib/validators";
 import { toStorageDate, storageDateToIso } from "@/lib/dates";
+import { mergeEntryData } from "@/lib/entryMerge";
 import type { EntryData } from "@/lib/insights";
 
 export type ActionResult =
@@ -80,10 +81,17 @@ export async function upsertEntry(formData: FormData): Promise<ActionResult> {
   const { date, ...data } = parsed.data;
   const storageDate = toStorageDate(date);
 
+  // Merge against the day's existing row so additive fields accumulate instead
+  // of overwriting (steps, water, calories, …); other fields are replaced.
+  const existing = await prisma.healthEntry.findUnique({
+    where: { userId_date: { userId, date: storageDate } },
+  });
+  const merged = mergeEntryData(existing as Record<string, unknown> | null, data);
+
   await prisma.healthEntry.upsert({
     where: { userId_date: { userId, date: storageDate } },
-    create: { userId, date: storageDate, ...data },
-    update: { ...data },
+    create: { userId, date: storageDate, ...merged },
+    update: { ...merged },
   });
 
   revalidatePath("/dashboard");

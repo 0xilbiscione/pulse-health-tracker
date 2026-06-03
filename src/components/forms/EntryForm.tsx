@@ -43,6 +43,15 @@ export function EntryForm({
   const [saved, setSaved] = useState(false);
   const [pending, startTransition] = useTransition();
 
+  // Additive fields render empty — a submitted value adds to the day's running
+  // total — so we surface how much is already logged as a hint.
+  const addHint = (field: keyof EntryData, unit: string) => {
+    const v = entry ? entry[field] : null;
+    return typeof v === "number"
+      ? `Today so far: ${v.toLocaleString()}${unit ? ` ${unit}` : ""} · adds on top`
+      : "Adds to today's total";
+  };
+
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErrors({});
@@ -109,20 +118,20 @@ export function EntryForm({
               tab !== "activity" && "hidden",
             )}
           >
-              <Field label="Steps" htmlFor="steps" error={errors.steps}>
-                <Input id="steps" name="steps" type="number" min="0" placeholder="8000" defaultValue={val(entry?.steps)} />
+              <Field label="Steps" htmlFor="steps" error={errors.steps} hint={addHint("steps", "steps")}>
+                <Input id="steps" name="steps" type="number" min="0" placeholder="+ add steps" defaultValue="" />
               </Field>
-              <Field label="Distance (km)" htmlFor="distanceKm" error={errors.distanceKm}>
-                <Input id="distanceKm" name="distanceKm" type="number" step="0.1" min="0" placeholder="5.2" defaultValue={val(entry?.distanceKm)} />
+              <Field label="Distance (km)" htmlFor="distanceKm" error={errors.distanceKm} hint={addHint("distanceKm", "km")}>
+                <Input id="distanceKm" name="distanceKm" type="number" step="0.1" min="0" placeholder="+ add km" defaultValue="" />
               </Field>
-              <Field label="Active minutes" htmlFor="activeMinutes" error={errors.activeMinutes}>
-                <Input id="activeMinutes" name="activeMinutes" type="number" min="0" placeholder="45" defaultValue={val(entry?.activeMinutes)} />
+              <Field label="Active minutes" htmlFor="activeMinutes" error={errors.activeMinutes} hint={addHint("activeMinutes", "min")}>
+                <Input id="activeMinutes" name="activeMinutes" type="number" min="0" placeholder="+ add min" defaultValue="" />
               </Field>
               <Field label="Workout type" htmlFor="workoutType" error={errors.workoutType}>
                 <Input id="workoutType" name="workoutType" placeholder="Run, Strength…" defaultValue={val(entry?.workoutType)} />
               </Field>
-              <Field label="Workout minutes" htmlFor="workoutMinutes" error={errors.workoutMinutes}>
-                <Input id="workoutMinutes" name="workoutMinutes" type="number" min="0" placeholder="30" defaultValue={val(entry?.workoutMinutes)} />
+              <Field label="Workout minutes" htmlFor="workoutMinutes" error={errors.workoutMinutes} hint={addHint("workoutMinutes", "min")}>
+                <Input id="workoutMinutes" name="workoutMinutes" type="number" min="0" placeholder="+ add min" defaultValue="" />
               </Field>
           </div>
 
@@ -155,20 +164,20 @@ export function EntryForm({
               tab !== "nutrition" && "hidden",
             )}
           >
-              <Field label="Calories (kcal)" htmlFor="calories" error={errors.calories}>
-                <Input id="calories" name="calories" type="number" min="0" placeholder="2100" defaultValue={val(entry?.calories)} />
+              <Field label="Calories (kcal)" htmlFor="calories" error={errors.calories} hint={addHint("calories", "kcal")}>
+                <Input id="calories" name="calories" type="number" min="0" placeholder="+ add kcal" defaultValue="" />
               </Field>
-              <Field label="Water (ml)" htmlFor="waterMl" error={errors.waterMl}>
-                <Input id="waterMl" name="waterMl" type="number" min="0" placeholder="2000" defaultValue={val(entry?.waterMl)} />
+              <Field label="Water (ml)" htmlFor="waterMl" error={errors.waterMl} hint={addHint("waterMl", "ml")}>
+                <Input id="waterMl" name="waterMl" type="number" min="0" placeholder="+ add ml" defaultValue="" />
               </Field>
-              <Field label="Protein (g)" htmlFor="proteinG" error={errors.proteinG}>
-                <Input id="proteinG" name="proteinG" type="number" step="0.1" min="0" placeholder="120" defaultValue={val(entry?.proteinG)} />
+              <Field label="Protein (g)" htmlFor="proteinG" error={errors.proteinG} hint={addHint("proteinG", "g")}>
+                <Input id="proteinG" name="proteinG" type="number" step="0.1" min="0" placeholder="+ add g" defaultValue="" />
               </Field>
-              <Field label="Carbs (g)" htmlFor="carbsG" error={errors.carbsG}>
-                <Input id="carbsG" name="carbsG" type="number" step="0.1" min="0" placeholder="250" defaultValue={val(entry?.carbsG)} />
+              <Field label="Carbs (g)" htmlFor="carbsG" error={errors.carbsG} hint={addHint("carbsG", "g")}>
+                <Input id="carbsG" name="carbsG" type="number" step="0.1" min="0" placeholder="+ add g" defaultValue="" />
               </Field>
-              <Field label="Fat (g)" htmlFor="fatG" error={errors.fatG}>
-                <Input id="fatG" name="fatG" type="number" step="0.1" min="0" placeholder="70" defaultValue={val(entry?.fatG)} />
+              <Field label="Fat (g)" htmlFor="fatG" error={errors.fatG} hint={addHint("fatG", "g")}>
+                <Input id="fatG" name="fatG" type="number" step="0.1" min="0" placeholder="+ add g" defaultValue="" />
               </Field>
           </div>
 

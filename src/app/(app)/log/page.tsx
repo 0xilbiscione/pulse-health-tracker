@@ -32,7 +32,9 @@ export default async function LogPage({
       <EntryForm date={isoDate} entry={entry} />
 
       <p className="mt-4 text-center text-xs text-[var(--color-muted)]">
-        Fill in whatever you have — every field is optional. One entry is kept per day.
+        Fill in whatever you have — every field is optional. Activity &amp; nutrition
+        values <strong>add to today&rsquo;s running total</strong>; body measurements and
+        sleep/mood ratings replace the latest reading.
       </p>
     </div>
   );
