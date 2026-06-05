@@ -10,7 +10,7 @@ export function Topbar({
 }) {
   const initial = (name ?? email ?? "?").charAt(0).toUpperCase();
   return (
-    <header className="flex items-center justify-between border-b border-[var(--color-border)] bg-white/80 px-5 py-3 backdrop-blur">
+    <header className="sticky top-0 z-10 flex items-center justify-between border-b border-[var(--color-border)] bg-white/80 px-5 py-3 backdrop-blur">
       <div>
         <p className="text-xs text-[var(--color-muted)]">
           {new Date().toLocaleDateString(undefined, {

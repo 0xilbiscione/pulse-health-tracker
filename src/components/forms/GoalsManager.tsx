@@ -54,7 +54,7 @@ export function GoalsManager({
 
         return (
           <GoalCard
-            key={def.metric}
+            key={`${def.metric}-${active ? 1 : 0}-${target}`}
             metricLabel={def.label}
             unit={def.unit}
             color={def.color}
@@ -114,21 +114,22 @@ function GoalCard({
             <h3 className="text-sm font-semibold">{metricLabel}</h3>
             <button
               type="button"
+              disabled={disabled}
               onClick={() => {
                 const next = !a;
                 setA(next);
                 onSave(Number(t) || 0, next);
               }}
               className={cn(
-                "relative h-5 w-9 rounded-full transition-colors",
-                a ? "bg-[var(--color-brand-600)]" : "bg-gray-300",
+                "relative h-6 w-11 cursor-pointer overflow-hidden rounded-full transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50",
+                a ? "bg-[var(--color-brand-600)]" : "bg-[var(--color-faint)]",
               )}
               aria-label={a ? "Deactivate goal" : "Activate goal"}
             >
               <span
                 className={cn(
-                  "absolute top-0.5 h-4 w-4 rounded-full bg-white transition-transform",
-                  a ? "translate-x-4" : "translate-x-0.5",
+                  "absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200",
+                  a ? "translate-x-5" : "translate-x-0",
                 )}
               />
             </button>
