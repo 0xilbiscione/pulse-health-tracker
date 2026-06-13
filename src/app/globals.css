@@ -1,28 +1,50 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap");
 
+/* ===========================================================================
+   FitBase — a warm, vital-green health tracker in the MetricBase ecosystem.
+   Tokens kept under the existing --color-* / --radius-* names so every
+   component inherits the FitBase identity automatically.
+   =========================================================================== */
 @theme {
-  --color-bg: #f6f7f9;
+  /* Neutrals / surfaces — cool-warm near-white */
+  --color-bg: #f5f7f6;
   --color-surface: #ffffff;
-  --color-border: #e8eaed;
-  --color-ink: #111827;
-  --color-muted: #6b7280;
+  --color-border: #e6eae8;
+  --color-ink: #14201b;
+  --color-muted: #687772;
+  --color-faint: #9aa8a2;
+  --color-track: #d3dad7;
 
-  --color-brand-50: #eef6ff;
-  --color-brand-100: #d9ebff;
-  --color-brand-500: #2f6fed;
-  --color-brand-600: #1f5fe0;
-  --color-brand-700: #1b4fc0;
+  /* Brand — vital green */
+  --color-brand-50: #e9faf1;
+  --color-brand-100: #c4f0db;
+  --color-brand-500: #1fb877;
+  --color-brand-600: #0e9f63;
+  --color-brand-700: #0a7d4e;
 
-  --color-activity: #f97316;
-  --color-body: #8b5cf6;
-  --color-nutrition: #10b981;
-  --color-sleep: #6366f1;
-  --color-water: #06b6d4;
+  /* Ecosystem — MetricBase gold (accent only, never a CTA) */
+  --color-gold: #c9a84c;
+  --color-gold-600: #a8862f;
+  --color-gold-tint: #f7f0db;
 
-  --radius-card: 16px;
+  /* Per-metric accents — reharmonized, each domain owns one color everywhere */
+  --color-activity: #f5731f;
+  --color-active: #e23b48;
+  --color-water: #11a8c4;
+  --color-nutrition: #13a06a;
+  --color-sleep: #5b63e6;
+  --color-body: #8b53e6;
+  --color-heart: #e11d54;
 
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
+  /* Generous, friendly rounding */
+  --radius-card: 18px;
+  --radius-control: 13px;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Bricolage Grotesque", "Inter", ui-sans-serif, system-ui,
+    sans-serif;
 }
 
 * {
@@ -47,11 +69,12 @@ body {
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
+  background: var(--color-track);
   border-radius: 9999px;
   border: 2px solid var(--color-bg);
 }
 
+/* A visible green focus ring on every input + keyboard-focused control */
 input:focus,
 select:focus,
 textarea:focus,

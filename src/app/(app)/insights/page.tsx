@@ -31,7 +31,7 @@ export default async function InsightsPage() {
   return (
     <div className="mx-auto max-w-5xl space-y-6">
       <div>
-        <h1 className="text-xl font-semibold tracking-tight">Insights</h1>
+        <h1 className="font-display text-xl font-bold tracking-[-0.02em]">Insights</h1>
         <p className="mt-0.5 text-sm text-[var(--color-muted)]">
           Weekly summaries and trends across all your metrics.
         </p>
@@ -174,7 +174,7 @@ function Totals({
   return (
     <Card className="p-4">
       <p className="text-xs text-[var(--color-muted)]">{label}</p>
-      <p className="mt-1 text-xl font-semibold tracking-tight">{value}</p>
+      <p className="mt-1 font-display text-xl font-bold tracking-[-0.01em]">{value}</p>
       <p className="text-[11px] text-[var(--color-muted)]">{sub}</p>
     </Card>
   );

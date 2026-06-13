@@ -11,18 +11,18 @@ export function StreakCard({
   return (
     <Card className="p-5">
       <div className="flex items-center gap-4">
-        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-orange-500">
+        <div className="flex h-14 w-14 items-center justify-center rounded-[var(--radius-card)] bg-[#f5731f1a] text-[var(--color-activity)]">
           <Flame size={26} />
         </div>
         <div>
-          <p className="text-2xl font-semibold tracking-tight">
+          <p className="font-display text-2xl font-bold tracking-[-0.01em]">
             {loggingStreak} {loggingStreak === 1 ? "day" : "days"}
           </p>
           <p className="text-sm text-[var(--color-muted)]">Logging streak</p>
         </div>
       </div>
       {bestGoal && bestGoal.streak > 0 && (
-        <div className="mt-4 flex items-center justify-between rounded-xl bg-[var(--color-bg)] px-3 py-2.5">
+        <div className="mt-4 flex items-center justify-between rounded-[var(--radius-control)] bg-[var(--color-bg)] px-3 py-2.5">
           <span className="text-sm text-[var(--color-muted)]">
             {bestGoal.label} goal streak
           </span>

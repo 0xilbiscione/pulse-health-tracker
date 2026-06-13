@@ -45,7 +45,7 @@ export function ProgressRing({
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-base font-semibold text-[var(--color-ink)]">
+          <span className="font-display text-base font-bold text-[var(--color-ink)]">
             {pct}%
           </span>
         </div>

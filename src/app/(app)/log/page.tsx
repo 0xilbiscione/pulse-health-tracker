@@ -23,7 +23,7 @@ export default async function LogPage({
     <div className="mx-auto max-w-3xl">
       <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight">Log entry</h1>
+          <h1 className="font-display text-xl font-bold tracking-[-0.02em]">Log entry</h1>
           <p className="mt-0.5 text-sm text-[var(--color-muted)]">{prettyDate}</p>
         </div>
         <DatePicker isoDate={isoDate} />

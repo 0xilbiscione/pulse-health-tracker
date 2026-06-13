@@ -80,7 +80,7 @@ export default async function DashboardPage() {
     <div className="mx-auto max-w-6xl space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight">Dashboard</h1>
+          <h1 className="font-display text-xl font-bold tracking-[-0.02em]">Dashboard</h1>
           <p className="mt-0.5 text-sm text-[var(--color-muted)]">
             Here’s how you’re doing.
           </p>
@@ -236,9 +236,12 @@ function EmptyState() {
       <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-brand-50)] text-[var(--color-brand-600)]">
         <PlusCircle size={26} />
       </div>
-      <h1 className="text-lg font-semibold">Welcome to Pulse 👋</h1>
+      <h1 className="font-display text-xl font-bold tracking-[-0.02em]">
+        Welcome to FitBase 👋
+      </h1>
       <p className="mx-auto mt-2 max-w-xs text-sm text-[var(--color-muted)]">
-        Log your first entry to start seeing your trends, goals, and insights here.
+        Log your first entry and watch a few numbers a day turn into trends,
+        goals, and insights — right here.
       </p>
       <Link href="/log" className="mt-5 inline-block">
         <Button>

@@ -3,25 +3,34 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pulse — User Guidelines</title>
+    <title>FitBase — User guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
-        --ink: #111827;
-        --muted: #6b7280;
-        --border: #e8eaed;
-        --bg: #f6f7f9;
-        --brand: #1f5fe0;
-        --brand-50: #eef6ff;
-        --activity: #f97316;
-        --body: #8b5cf6;
-        --nutrition: #10b981;
-        --sleep: #6366f1;
-        --water: #06b6d4;
+        --ink: #14201b;
+        --muted: #687772;
+        --border: #e6eae8;
+        --bg: #f5f7f6;
+        --brand: #0e9f63;
+        --brand-700: #0a7d4e;
+        --brand-50: #e9faf1;
+        --gold-600: #a8862f;
+        --display: "Bricolage Grotesque", "Inter", ui-sans-serif, system-ui, sans-serif;
+        --activity: #f5731f;
+        --body: #8b53e6;
+        --nutrition: #13a06a;
+        --sleep: #5b63e6;
+        --water: #11a8c4;
       }
       * { box-sizing: border-box; }
       html, body { margin: 0; padding: 0; }
       body {
-        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         color: var(--ink);
         background: var(--bg);
         line-height: 1.6;
@@ -43,13 +52,13 @@
       }
       .logo {
         width: 46px; height: 46px;
-        border-radius: 14px;
+        border-radius: 15px;
         background: var(--brand);
         color: #fff;
         display: flex; align-items: center; justify-content: center;
         font-size: 24px;
       }
-      .masthead h1 { font-size: 24px; margin: 0; letter-spacing: -0.02em; }
+      .masthead h1 { font-family: var(--display); font-weight: 700; font-size: 24px; margin: 0; letter-spacing: -0.03em; }
       .masthead p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
       .masthead .spacer { flex: 1; }
 
@@ -61,20 +70,21 @@
         padding: 9px 16px; font-size: 14px; font-weight: 600;
         cursor: pointer; text-decoration: none;
       }
-      .btn:hover { background: #1b4fc0; }
+      .btn:hover { background: var(--brand-700); }
 
       h2 {
+        font-family: var(--display); font-weight: 700;
         font-size: 18px; margin: 34px 0 10px;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.02em;
         padding-top: 8px;
       }
-      h3 { font-size: 15px; margin: 20px 0 6px; }
+      h3 { font-family: var(--display); font-weight: 600; font-size: 15px; margin: 20px 0 6px; }
       p, li { font-size: 14.5px; }
       a { color: var(--brand); }
 
       .lead {
         background: var(--brand-50);
-        border: 1px solid #d9ebff;
+        border: 1px solid #c4f0db;
         border-radius: 14px;
         padding: 16px 18px;
         font-size: 15px;
@@ -174,8 +184,8 @@
       <header class="masthead">
         <div class="logo">♥</div>
         <div>
-          <h1>Pulse — User Guidelines</h1>
-          <p>Your personal health dashboard · track, set goals, see your trends</p>
+          <h1>FitBase — User guide</h1>
+          <p>A few numbers a day, turned into momentum · track, set goals, see your trends</p>
         </div>
       </header>
 
@@ -184,8 +194,8 @@
       </div>
 
       <p class="lead">
-        <strong>Welcome to Pulse.</strong> Log a few numbers each day — steps, weight,
-        meals, sleep — and Pulse turns them into a clean dashboard with goal rings,
+        <strong>Welcome to FitBase.</strong> Log a few numbers each day — steps, weight,
+        meals, sleep — and FitBase turns them into a warm dashboard with goal rings,
         streaks, and weekly insights. Everything below takes about five minutes to learn.
       </p>
 
@@ -210,7 +220,7 @@
 
       <h2>2. Logging an entry</h2>
       <p>
-        Pulse keeps <strong>one entry per day</strong>. Go to <strong>Log entry</strong>
+        FitBase keeps <strong>one entry per day</strong>. Go to <strong>Log entry</strong>
         in the menu, pick the date if needed, and fill in whatever you have — every field
         is optional. The form is split into four tabs:
       </p>
@@ -259,6 +269,30 @@
         </ol>
         <p style="margin-bottom:0;color:var(--muted);font-size:13px">
           Tip: log at the same time each day (e.g. before bed) to keep your streak alive.
+        </p>
+      </div>
+
+      <h3>How repeated saves work</h3>
+      <div class="card">
+        <p style="margin-top:0">
+          You can log the same day as many times as you like — there's always just one
+          entry per day, and it updates each time you save.
+        </p>
+        <ul class="tight">
+          <li><strong>Activity &amp; Nutrition values add up.</strong> Steps, distance,
+            active/workout minutes, calories, protein, carbs, fat, and water are
+            <strong>added to the day's running total</strong>. Log 3,000 steps in the
+            morning and 5,000 later and the day shows 8,000. These fields start empty and
+            show a “Today so far” hint.</li>
+          <li><strong>Body &amp; Sleep/Mood values replace.</strong> Weight, body fat,
+            blood pressure, resting heart rate, sleep, and the 1–5 ratings keep your
+            latest reading — they don't add up.</li>
+        </ul>
+        <p style="margin-bottom:0">
+          Made a typo in a running total? On the <strong>Activity</strong> or
+          <strong>Nutrition</strong> tab, switch the toggle from <strong>Add</strong> to
+          <strong>Set total</strong>. The fields pre-fill with the current totals so you
+          can edit them directly and save.
         </p>
       </div>
 
@@ -328,7 +362,14 @@
           data.</p>
       </details>
       <details>
-        <summary>Which units does Pulse use?</summary>
+        <summary>I logged the wrong number — how do I fix it?</summary>
+        <p>For an activity or nutrition total, switch the <strong>Add / Set total</strong>
+          toggle to <strong>Set total</strong>, correct the value, and save. For body and
+          sleep/mood fields just retype the value and save — those replace the previous
+          reading.</p>
+      </details>
+      <details>
+        <summary>Which units does FitBase use?</summary>
         <p>Metric: kilograms, kilometres, millilitres, and kilocalories. Quality, mood,
           energy, and stress use a simple 1–5 scale.</p>
       </details>
@@ -342,7 +383,7 @@
       </details>
 
       <footer class="foot">
-        <span>Pulse · Health Tracker</span>
+        <span>FitBase · by MetricBase</span>
         <span>fit.metricbase.org/userguidelines</span>
       </footer>
     </main>

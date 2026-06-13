@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Pulse — Health Tracker",
-  description: "Track activity, body, nutrition, sleep & mood. See your trends.",
+  title: "FitBase — Health tracker",
+  description:
+    "Turn a few numbers a day into momentum you can see. Track activity, body, nutrition, sleep & mood — and watch your trends.",
 };
 
 export default function RootLayout({

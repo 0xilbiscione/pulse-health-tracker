@@ -29,7 +29,7 @@ export function StatCard({
       <span
         className={cn(
           "inline-flex items-center gap-0.5 text-xs font-medium",
-          isGood ? "text-emerald-600" : "text-red-500",
+          isGood ? "text-[var(--color-brand-600)]" : "text-[var(--color-active)]",
         )}
       >
         <Icon size={13} />
@@ -48,7 +48,7 @@ export function StatCard({
     <Card className="p-4">
       <div className="flex items-center justify-between">
         <div
-          className="flex h-9 w-9 items-center justify-center rounded-xl"
+          className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-control)]"
           style={{ backgroundColor: `${color}1a`, color }}
         >
           {icon}
@@ -57,7 +57,7 @@ export function StatCard({
       </div>
       <div className="mt-3">
         <div className="flex items-baseline gap-1">
-          <span className="text-2xl font-semibold tracking-tight text-[var(--color-ink)]">
+          <span className="font-display text-2xl font-bold tracking-[-0.01em] text-[var(--color-ink)]">
             {value}
           </span>
           {unit && (

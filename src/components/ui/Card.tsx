@@ -10,7 +10,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[0_1px_2px_rgba(16,24,40,0.04)]",
+        "rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[0_1px_2px_rgba(20,50,38,0.05)]",
         className,
       )}
     >
@@ -31,7 +31,9 @@ export function CardHeader({
   return (
     <div className="flex items-start justify-between gap-3 px-5 pt-5">
       <div>
-        <h3 className="text-sm font-semibold text-[var(--color-ink)]">{title}</h3>
+        <h3 className="font-display text-sm font-semibold text-[var(--color-ink)]">
+          {title}
+        </h3>
         {subtitle && (
           <p className="mt-0.5 text-xs text-[var(--color-muted)]">{subtitle}</p>
         )}

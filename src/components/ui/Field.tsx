@@ -32,7 +32,7 @@ export function Field({
 }
 
 export const inputClass = cn(
-  "h-10 w-full rounded-xl border border-[var(--color-border)] bg-white px-3 text-sm",
+  "h-10 w-full rounded-[var(--radius-control)] border border-[var(--color-border)] bg-white px-3 text-sm",
   "text-[var(--color-ink)] placeholder:text-gray-400",
 );
 

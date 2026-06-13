@@ -1,8 +1,9 @@
-# Pulse — Health Tracker
+# FitBase — Health tracker
 
-A multi-user health tracking web app with a dashboard. Track **activity, body
-measurements, nutrition & water, and sleep & mood**; set goals; and see your
-trends, streaks, and weekly insights.
+**FitBase** is the warm, vital-green health tracker in the **MetricBase**
+ecosystem. A multi-user web app that turns a few numbers a day into momentum you
+can see. Track **activity, body measurements, nutrition & water, and sleep &
+mood**; set goals; and see your trends, streaks, and weekly insights.
 
 Built with **Next.js 15 (App Router) + TypeScript**, **Prisma + SQLite**,
 **Auth.js (credentials)**, **Tailwind CSS v4**, and **Recharts**.
@@ -14,7 +15,7 @@ Built with **Next.js 15 (App Router) + TypeScript**, **Prisma + SQLite**,
 ## Features
 
 - 🔐 **Multi-user auth** — email/password sign-up & login; each user's data is private
-- 📝 **Fast daily logging** — one tabbed form (Activity / Body / Nutrition / Sleep & Mood); one entry per day (edit in place)
+- 📝 **Fast daily logging** — one tabbed form (Activity / Body / Nutrition / Sleep & Mood); one entry per day. Cumulative fields (steps, water, calories…) **add up** across same-day saves; a **Set total** toggle lets you edit a running total directly
 - 📊 **Dashboard** — today's stat cards with week-over-week deltas, goal progress rings, trend charts, and a logging streak
 - 🎯 **Goals** — toggle goals on/off and set daily targets (steps, water, sleep, active minutes, calories, weight)
 - 🔥 **Streaks** — logging streak + per-goal streaks
@@ -90,7 +91,8 @@ src/
     auth.ts              # Auth.js (Credentials) — full server config
     auth.config.ts       # edge-safe config shared with middleware (trustHost)
     prisma.ts            # Prisma singleton
-    metrics.ts           # central metric definitions (label/unit/color/goal direction)
+    metrics.ts           # central metric definitions + ADDITIVE_ENTRY_FIELDS
+    entryMerge.ts        # pure mergeEntryData: sum additive fields vs replace
     insights.ts          # pure helpers: averages, trends, streaks, goal progress, insight text
     validators.ts        # Zod schemas (entry, goal, signup, login)
   app/
@@ -167,6 +169,13 @@ which runs `pm2 resurrect` from `~/.pm2/dump.pm2` on startup.
 
 - The data model keeps **one `HealthEntry` per user per day** (upsert on
   `[userId, date]`), which makes logging simple and dashboard aggregation a single query.
+- **Additive vs replace fields.** Cumulative fields (`ADDITIVE_ENTRY_FIELDS` in
+  `lib/metrics.ts`: steps, distance, active/workout minutes, calories, macros,
+  water) accumulate across same-day saves; everything else (weight, BP, heart
+  rate, sleep, mood ratings) is last-write. The pure `mergeEntryData()` helper
+  (`lib/entryMerge.ts`) sums additive fields against the existing row before the
+  upsert. Saving in **Set total** mode (`mode=set`) bypasses the sum and writes
+  the values directly, so a mistyped total can be corrected.
 - Auth config is **split**: `auth.config.ts` is edge-safe (no Prisma/bcrypt) and
   shared with middleware; `auth.ts` adds the Credentials provider for the server.
   `trustHost: true` + `AUTH_URL` make secure cookies work behind the tunnel.

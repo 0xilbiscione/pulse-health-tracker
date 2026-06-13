@@ -24,11 +24,13 @@ export function Sidebar() {
 
   return (
     <aside className="hidden w-60 shrink-0 flex-col border-r border-[var(--color-border)] bg-white px-3 py-5 md:flex">
-      <div className="flex items-center gap-2 px-2 pb-6">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--color-brand-600)] text-white">
+      <div className="flex items-center gap-2.5 px-2 pb-6">
+        <div className="flex h-9 w-9 items-center justify-center rounded-[15px] bg-[var(--color-brand-600)] text-white">
           <HeartPulse size={18} />
         </div>
-        <span className="text-lg font-semibold tracking-tight">Pulse</span>
+        <span className="font-display text-lg font-bold tracking-[-0.03em] text-[var(--color-ink)]">
+          FitBase
+        </span>
       </div>
 
       <nav className="flex flex-col gap-1">
@@ -52,16 +54,19 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="mt-auto px-2 pt-6">
+      <div className="mt-auto flex flex-col gap-3 px-2 pt-6">
         <a
           href="/userguidelines"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 rounded-xl bg-[var(--color-bg)] px-3 py-2.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:bg-[var(--color-brand-50)] hover:text-[var(--color-brand-700)]"
+          className="flex items-center gap-2 rounded-[var(--radius-control)] bg-[var(--color-bg)] px-3 py-2.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:bg-[var(--color-brand-50)] hover:text-[var(--color-brand-700)]"
         >
           <BookOpen size={14} />
           User guide
         </a>
+        <p className="px-1 text-[11px] font-medium text-[var(--color-gold-600)]">
+          by MetricBase
+        </p>
       </div>
     </aside>
   );
